@@ -4,6 +4,7 @@ use \Hcode\Page;
 use \Hcode\PageAdmin;
 use \Hcode\Model\User;
 use \Hcode\Model\Category;
+use \Hcode\Model\Product;
 
 $app->get('/admin/categories', function(){
 	User::verifyLogin();
@@ -76,5 +77,34 @@ $app->get('/admin/categories/:idcategory/products',function($idcategory){
     ]);
 });
 
+$app->get('/admin/categories/:idcategory/products/:idproduct/add',function($idcategory,$idproduct){
+	User::verifyLogin();
+	$category = new Category();
+	$category->get((int)$idcategory);
+
+	$page = new PageAdmin();
+	
+    $product = new Product();
+    $product->get((int)$idproduct);
+    $category->addProduct($product);
+
+    header("Location: /admin/categories/".$idcategory."/products");
+    exit;
+});
+
+$app->get('/admin/categories/:idcategory/products/:idproduct/remove',function($idcategory,$idproduct){
+	User::verifyLogin();
+	$category = new Category();
+	$category->get((int)$idcategory);
+	$page = new PageAdmin();
+	
+    $product = new Product();
+    $product->get((int)$idproduct);
+    $category->removeProduct($product);
+	
+
+    header("Location: /admin/categories/".$idcategory."/products");
+    exit;
+});
 
  ?>
