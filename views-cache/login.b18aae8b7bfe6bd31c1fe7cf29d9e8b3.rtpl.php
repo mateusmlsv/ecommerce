@@ -42,6 +42,9 @@
         <input type="password" class="form-control" placeholder="Password" name="password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
+      <?php if( $error != '' ){ ?><div class="row"><div class="col-xs-12"><p style="color:red;"><?php echo htmlspecialchars( $error, ENT_COMPAT, 'UTF-8', FALSE ); ?></p></div></div>
+      <?php }else{ ?><div class="row"><div class="col-xs-12" style="height:30px"><p></p></div></div>
+      <?php } ?>
       <div class="row">
         <div class="col-xs-8">
           <div class="checkbox icheck">
